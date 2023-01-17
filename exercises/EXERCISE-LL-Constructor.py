@@ -10,8 +10,6 @@ class LinkedList:
         self.tail = new_node
         self.length = 1
 
-
-
  
 my_linked_list = LinkedList(4)
 
