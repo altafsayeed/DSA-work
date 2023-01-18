@@ -53,11 +53,23 @@ class LinkedList:
         self.length += 1
         return True
 
+    def pop_first(self):
+        if self.length == 0: # Edge case 1: If list is empty, return None
+            return None
+        temp = self.head    # Create temp and point it to the head
+        self.head = self.head.next  # Change the head to the next node
+        temp.next = None    # Set original head's next to None
+        self.length -= 1
+        if self.length == 0:    # Edge case 2: If list is empty after decrementing,
+            self.tail = None    # Set tail to None since it's still pointing to a node
+        return temp
+
 
 
 linked_list = LinkedList(2)
-linked_list.append(3)
+linked_list.append(1)
 
-linked_list.prepend(1)
 
-linked_list.print_list()
+print(linked_list.pop_first())
+print(linked_list.pop_first())
+print(linked_list.pop_first())
