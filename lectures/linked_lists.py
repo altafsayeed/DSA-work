@@ -64,12 +64,28 @@ class LinkedList:
             self.tail = None    # Set tail to None since it's still pointing to a node
         return temp
 
+    def get(self, index):
+        if index < 0 or index >= self.length:   # Check if index value is valid
+            return None
+        temp = self.head    # Create temp variable and set it to the head
+        for _ in range(index):  # Create for loop from 0 to the index value, loop will stop at the index value
+            temp = temp.next    # Go to next node in each iteration
+        return temp
+
+    def set_value(self, index, value):
+        temp = self.get(index)  # We can use the get method we made, set temp equal to the node at the index
+        if temp:    # If the index was valid, we will have a temp, otherwise there will be no temp
+            temp.value = value  # Set temp node's value to the value passed in
+            return True
+        return False
 
 
-linked_list = LinkedList(2)
-linked_list.append(1)
 
+linked_list = LinkedList(11)
+linked_list.append(3)
+linked_list.append(22)
+linked_list.append(7)
 
-print(linked_list.pop_first())
-print(linked_list.pop_first())
-print(linked_list.pop_first())
+linked_list.set_value(1, 4)
+
+linked_list.print_list()
