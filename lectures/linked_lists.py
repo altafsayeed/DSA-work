@@ -42,11 +42,22 @@ class LinkedList:
             self.tail = None # since they are still being stored
         return temp # Must return the node being popped to remove it
 
+    def prepend(self, value):
+        new_node = Node(value)
+        if self.length == 0:    # Edge case: If list is empty, set head and tail to new node
+            self.head = new_node
+            self.tail = new_node
+        else: 
+            new_node.next = self.head   # Set new_node's next value to the current head
+            self.head = new_node    # Change current head to new node
+        self.length += 1
+        return True
 
 
-linked_list = LinkedList(1)
-linked_list.append(2)
 
-print(linked_list.pop())
-print(linked_list.pop())
-print(linked_list.pop())
+linked_list = LinkedList(2)
+linked_list.append(3)
+
+linked_list.prepend(1)
+
+linked_list.print_list()
