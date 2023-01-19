@@ -108,13 +108,24 @@ class LinkedList:
         self.length -= 1
         return temp
 
+    def reverse(self):
+        temp = self.head                        # Create temp variable and point it to the head
+        self.head = self.tail                   # Make the head point to the tail
+        self.tail = temp                        # Make the tail point to temp (which is at the old head)
+        after = temp.next                       # Create after variable and point it to node after head
+        before = None                           # Create before variable and set it to None
+        for _ in range (self.length):           # Iterate through the linked list
+            after = temp.next                   # Set after to point to next node after current one
+            temp.next = before                  # This is what flips the arrow the other way
+            before = temp                       # This move before up to the next node
+            temp = after                        # This moves temp up to the next node
 
 
-linked_list = LinkedList(11)
+linked_list = LinkedList(1)
+linked_list.append(2)
 linked_list.append(3)
-linked_list.append(23)
-linked_list.append(7)
+linked_list.append(4)
 
-print(linked_list.remove(2), '\n')
+linked_list.reverse()
 
 linked_list.print_list()
