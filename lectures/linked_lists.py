@@ -25,6 +25,7 @@ class LinkedList:
             self.tail.next = new_node   # Set tail.next from None to the new node
             self.tail = new_node    # Set tail to point to the new node
         self.length += 1
+        return True
 
     def pop(self):
         if self.length == 0: # Edge case 1: If the list is empty
@@ -78,14 +79,26 @@ class LinkedList:
             temp.value = value  # Set temp node's value to the value passed in
             return True
         return False
+    
+    def insert(self, index, value):
+        if index < 0 or index > self.length:    # If index is out of range, return false
+            return False
+        if index == 0:                          # If trying to insert at beginning of list, use prepend
+            return self.prepend(value)
+        if index == self.length:                # If trying to insert at end of list, use append
+            return self.append(value)
+        new_node = Node(value)                  # Create new node with value passed in
+        temp = self.get(index - 1)              # Create temp variable and let it point to node right before the insert position
+        new_node.next = temp.next               # Set new node's next node to the next node of temp
+        temp.next = new_node                    # Set temp's next node to be the new node
+        self.length += 1
+        return True
 
 
 
-linked_list = LinkedList(11)
-linked_list.append(3)
-linked_list.append(22)
-linked_list.append(7)
+linked_list = LinkedList(0)
+linked_list.append(2)
 
-linked_list.set_value(1, 4)
+linked_list.insert(1, 1)
 
 linked_list.print_list()
