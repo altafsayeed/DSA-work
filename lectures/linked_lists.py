@@ -93,12 +93,28 @@ class LinkedList:
         temp.next = new_node                    # Set temp's next node to be the new node
         self.length += 1
         return True
+    
+    def remove(self, index):
+        if index < 0 or index >= self.length:   # If index is out of bounds, return None
+            return None
+        if index == 0:                          # If trying to remove node at beginning of list, use pop_first()
+            return self.pop_first()
+        if index == self.length - 1:            # If trying to remove node at end of list, use pop()
+            return self.pop()
+        prev = self.get(index - 1)              # Create prev variable and assign to node right before the one we're removing
+        temp = prev.next                        # Create temp variable and assign to prev's next node (the one we're removing)
+        prev.next = temp.next                   # Assign prev.next to the node after the node we're removing
+        temp.next = None                        # Make temp.next equal to None so it cuts off the connection
+        self.length -= 1
+        return temp
 
 
 
-linked_list = LinkedList(0)
-linked_list.append(2)
+linked_list = LinkedList(11)
+linked_list.append(3)
+linked_list.append(23)
+linked_list.append(7)
 
-linked_list.insert(1, 1)
+print(linked_list.remove(2), '\n')
 
 linked_list.print_list()
