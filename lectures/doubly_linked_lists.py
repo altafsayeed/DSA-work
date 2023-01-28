@@ -68,12 +68,26 @@ class DoublyLinkedList:
             self.head.prev = None           # Cut connection from second node to first node
         self.length -= 1
         return temp
+    
+    def get(self, index):
+        if index < 0 or index >= self.length:       # If index is out of range, return None
+            return None
+        temp = self.head                        # Create temp and point at head
+        if index < self.length/2:               # If index is in the first half, iterate from the head forward
+            for _ in range (index):
+                temp = temp.next
+        else:                               # If index is in the second half, iterate from the tail backwards
+            temp = self.tail
+            for _ in range (self.length - 1, index, -1):        # Start at the tail, end at the index, decrement by 1
+                temp = temp.prev
+        return temp
 
 
 
-my_doubly_linked_list = DoublyLinkedList(2)
+my_doubly_linked_list = DoublyLinkedList(0)
 my_doubly_linked_list.append(1)
+my_doubly_linked_list.append(2)
+my_doubly_linked_list.append(3)
 
-print(my_doubly_linked_list.pop_first())
-print(my_doubly_linked_list.pop_first())
-print(my_doubly_linked_list.pop_first())
+print(my_doubly_linked_list.get(1))
+print(my_doubly_linked_list.get(2))
