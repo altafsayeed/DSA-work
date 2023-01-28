@@ -24,12 +24,29 @@ class DoublyLinkedList:
             self.tail = new_node
         else:                               
             self.tail.next = new_node           # Set tail's next node to new node
-            self.tail.next.prev = self.tail     # Set tail's next node's previous node to old tail
+            new_node.prev = self.tail                # Set new node's previous node to old tail
             self.tail = new_node                # Finally, assign tail to the new node
+        self.length += 1
+        return True
+    
+    def pop(self):
+        if self.length == 0:     # If empty list, return None
+            return None
+        temp = self.tail         # Create temp variable and assign to tail
+        if self.length == 1:    # If only one node in list, set head and tail to None since list will become empty
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = self.tail.prev  # Set new tail equal to tail's previous node
+            self.tail.next = None       # Set new tail's next node to None to cut connection to last node
+            temp.prev = None            # Set temp's (old tail) previous node to None to cut connection
+        self.length -= 1
+        return temp
+
 
 my_doubly_linked_list = DoublyLinkedList(7)
 my_doubly_linked_list.append(10)
-my_doubly_linked_list.append(1)
-my_doubly_linked_list.append(17)
 
-my_doubly_linked_list.print_list()
+print(my_doubly_linked_list.pop())
+print(my_doubly_linked_list.pop())
+print(my_doubly_linked_list.pop())
