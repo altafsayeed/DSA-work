@@ -54,11 +54,26 @@ class DoublyLinkedList:
             self.head = new_node        # Make new node the new head
         self.length += 1
         return True
+    
+    def pop_first (self):
+        if self.length == 0:
+            return None
+        temp = self.head            # Create temp to point to node we will pop
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = self.head.next       # Set head equal to the node after current head
+            temp.next = None                # Cut connection from temp to next node
+            self.head.prev = None           # Cut connection from second node to first node
+        self.length -= 1
+        return temp
+
 
 
 my_doubly_linked_list = DoublyLinkedList(2)
-my_doubly_linked_list.append(3)
+my_doubly_linked_list.append(1)
 
-my_doubly_linked_list.prepend(1)
-
-my_doubly_linked_list.print_list()
+print(my_doubly_linked_list.pop_first())
+print(my_doubly_linked_list.pop_first())
+print(my_doubly_linked_list.pop_first())
