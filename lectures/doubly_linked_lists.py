@@ -42,11 +42,23 @@ class DoublyLinkedList:
             temp.prev = None            # Set temp's (old tail) previous node to None to cut connection
         self.length -= 1
         return temp
+    
+    def prepend(self, value):
+        new_node = Node(value)
+        if self.length == 0:             # Edge case: If list is empty, set head and tail to new node
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next = self.head   # Set new node's next to point to current head
+            self.head.prev = new_node   # Set head's previous node to point to new node
+            self.head = new_node        # Make new node the new head
+        self.length += 1
+        return True
 
 
-my_doubly_linked_list = DoublyLinkedList(7)
-my_doubly_linked_list.append(10)
+my_doubly_linked_list = DoublyLinkedList(2)
+my_doubly_linked_list.append(3)
 
-print(my_doubly_linked_list.pop())
-print(my_doubly_linked_list.pop())
-print(my_doubly_linked_list.pop())
+my_doubly_linked_list.prepend(1)
+
+my_doubly_linked_list.print_list()
