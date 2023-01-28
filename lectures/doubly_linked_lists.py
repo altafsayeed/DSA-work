@@ -5,7 +5,7 @@ class Node:
         self.prev = None        # The one difference between single and doubly linked list nodes
 
 class DoublyLinkedList:
-    def __init__(self, value):
+    def __init__(self, value):      # This is the same as singly linked lists
         new_node = Node(value)
         self.head = new_node
         self.tail = new_node
@@ -19,13 +19,13 @@ class DoublyLinkedList:
 
     def append(self, value):
         new_node = Node(value)
-        if self.length is None:
+        if self.length is None:         # If empty list, point head and tail to new node
             self.head = new_node
             self.tail = new_node
-        else:
-            self.tail.next = new_node
-            self.tail.next.prev = self.tail
-            self.tail = new_node
+        else:                               
+            self.tail.next = new_node           # Set tail's next node to new node
+            self.tail.next.prev = self.tail     # Set tail's next node's previous node to old tail
+            self.tail = new_node                # Finally, assign tail to the new node
 
 my_doubly_linked_list = DoublyLinkedList(7)
 my_doubly_linked_list.append(10)
