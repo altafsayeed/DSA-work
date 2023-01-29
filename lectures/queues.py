@@ -26,7 +26,23 @@ class Queue:
             self.last = new_node        # Set last node equal to the new node
         self.length += 1
 
+    def dequeue (self):
+        if self.first is None:          # If empty queue, return None
+            return None
+        temp = self.first               # Create temp variable and set to first node
+        if self.length == 1:            # If there's only one node in the queue, set first and last to None
+            self.last = None
+            self.first = None
+        else:       
+            self.first = self.first.next    # Set first equal to the second node
+            temp.next = None                # Set temp's next node equal to None to cut connection from second node
+        self.length -= 1
+        return temp
+
 my_queue = Queue(1)
 my_queue.enqueue(2)
 
-my_queue.print_queue()
+print(my_queue.dequeue())
+print(my_queue.dequeue())
+print(my_queue.dequeue())
+
