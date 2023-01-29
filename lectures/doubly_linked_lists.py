@@ -88,6 +88,24 @@ class DoublyLinkedList:
             temp.value = value          # Set temp node's value to the value passed in
             return True
         return False
+    
+    def insert(self, index, value):
+        if index < 0 or index >= self.length:       # If index is out of range, return False
+            return False
+        if index == 0:                          # If index is equal to the head, use prepend
+            return self.prepend(value)
+        if index == self.length:                # If index is equal to tail, use append
+            return self.append(value)
+        new_node = Node(value)                  
+        before = self.get(index - 1)            # Create before variable and point to node before the insert index
+        after = before.next                     # Create after variable and point to node after the insert index
+        new_node.prev = before                  # Set new node's prev node to before node
+        new_node.next = after                   # Set new node's next node to after node
+        before.next = new_node                  # Set before's next node to new node
+        after.prev = new_node                   # Set after's prev node to new node
+        self.length += 1
+        return True
+
 
 
 
@@ -96,6 +114,8 @@ my_doubly_linked_list.append(3)
 my_doubly_linked_list.append(23)
 my_doubly_linked_list.append(7)
 
-my_doubly_linked_list.set_value(1, 69)
+my_doubly_linked_list.print_list()
+
+my_doubly_linked_list.insert(2, 69)
 
 my_doubly_linked_list.print_list()
