@@ -81,13 +81,21 @@ class DoublyLinkedList:
             for _ in range (self.length - 1, index, -1):        # Start at the tail, end at the index, decrement by 1
                 temp = temp.prev
         return temp
+    
+    def set_value (self, index, value):
+        temp = self.get(index)          # We can use the get method we made, set temp equal to the node at the index
+        if temp:                        # If the index was valid, we will have a temp, otherwise there will be no temp
+            temp.value = value          # Set temp node's value to the value passed in
+            return True
+        return False
 
 
 
-my_doubly_linked_list = DoublyLinkedList(0)
-my_doubly_linked_list.append(1)
-my_doubly_linked_list.append(2)
+my_doubly_linked_list = DoublyLinkedList(11)
 my_doubly_linked_list.append(3)
+my_doubly_linked_list.append(23)
+my_doubly_linked_list.append(7)
 
-print(my_doubly_linked_list.get(1))
-print(my_doubly_linked_list.get(2))
+my_doubly_linked_list.set_value(1, 69)
+
+my_doubly_linked_list.print_list()
