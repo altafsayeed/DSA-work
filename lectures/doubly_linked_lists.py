@@ -90,7 +90,7 @@ class DoublyLinkedList:
         return False
     
     def insert(self, index, value):
-        if index < 0 or index >= self.length:       # If index is out of range, return False
+        if index < 0 or index > self.length:       # If index is out of range, return False
             return False
         if index == 0:                          # If index is equal to the head, use prepend
             return self.prepend(value)
@@ -105,6 +105,38 @@ class DoublyLinkedList:
         after.prev = new_node                   # Set after's prev node to new node
         self.length += 1
         return True
+    
+    def remove(self, index):
+        if index < 0 or index >= self.length:       
+            return None
+        if index == 0:                      # If index equals head, use pop_first 
+            return self.pop_first()         
+        if index == self.length - 1:        # If index equals tail, use pop
+            return self.pop()
+        temp = self.get(index)              
+        before = temp.prev              # Create before variable and assign to temp's previous node
+        after = temp.next               # Create after variable and assign to temp's next node
+        temp.next = None                # Cut connection to next node
+        temp.prev = None                # Cut connection to previous node
+        before.next = after             # Set before's next node to node after the one we're removing
+        after.prev = before             # Set after's previous node to node before the one we're removing
+        self.length -= 1
+        return temp
+    
+    def remove2(self, index):                   # Same function, but without using before and after variables. Only using temp
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop()
+        temp = self.get(index)
+        temp.next.prev = temp.prev
+        temp.prev.next = temp.next
+        temp.next = None
+        temp.prev = None
+        self.length -= 1
+        return temp
 
 
 
@@ -116,6 +148,7 @@ my_doubly_linked_list.append(7)
 
 my_doubly_linked_list.print_list()
 
-my_doubly_linked_list.insert(2, 69)
+my_doubly_linked_list.remove(2)
 
+print("After remove:")
 my_doubly_linked_list.print_list()
