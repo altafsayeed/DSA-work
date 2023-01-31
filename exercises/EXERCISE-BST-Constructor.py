@@ -1,13 +1,26 @@
 class Node:
     def __init__(self, value):
         self.value = value
-        self.left = None
         self.right = None
+        self.left = None
+        
 
 class BinarySearchTree:
     def __init__ (self):
-        self.root = None        # This is the top of the tree
+        self.root = None
+
+
+
 
 my_tree = BinarySearchTree()
 
 print(my_tree.root)
+
+
+ 
+"""
+    EXPECTED OUTPUT:
+    ----------------
+    None
+
+"""
