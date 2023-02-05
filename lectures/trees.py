@@ -28,11 +28,26 @@ class BinarySearchTree:
                     return True
                 temp = temp.right
 
-my_tree = BinarySearchTree()
-my_tree.insert(2)
-my_tree.insert(1)
-my_tree.insert(3)
+    def contains(self, value):
+        temp = self.root                # Create temp and point it to the root
+        while temp is not None:         # While temp is pointing to a node
+            if value < temp.value:      # If value is less than temp, move temp down to the left
+                temp = temp.left
+            elif value > temp.value:    # If value is greater than temp, move temp down to the right
+                temp = temp.right
+            else:
+                return True             # If value is equal to temp, we have found the node, return True
+        return False                    # If we hit None, node not found, while loop gets skipped, return False
 
-print(my_tree.root.value)
-print(my_tree.root.left.value)
-print(my_tree.root.right.value)
+my_tree = BinarySearchTree()
+my_tree.insert(47)
+my_tree.insert(21)
+my_tree.insert(76)
+my_tree.insert(18)
+my_tree.insert(27)
+my_tree.insert(52)
+my_tree.insert(82)
+
+print(my_tree.contains(27))
+
+print(my_tree.contains(17))
