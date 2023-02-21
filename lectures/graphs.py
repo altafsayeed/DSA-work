@@ -21,8 +21,11 @@ class Graph:
     
     def remove_edge(self, v1, v2):                      # Remove an edge between 2 vertices
         if v1 in self.adj_list.keys() and v2 in self.adj_list.keys():   # v1 and v2 must BOTH exist in the adj list keys
-            self.adj_list[v1].remove(v2)                                # At v1 in the list, remove v2 to break connection
-            self.adj_list[v2].remove(v1)                                # At v2 in the list, remove v1 to break connection
+            try:
+                self.adj_list[v1].remove(v2)                                # At v1 in the list, remove v2 to break connection
+                self.adj_list[v2].remove(v1)                                # At v2 in the list, remove v1 to break connection
+            except ValueError:                  # Ignores value error in the case where an edge between 2 vertices does not exist
+                pass
             return True
         return False
 
